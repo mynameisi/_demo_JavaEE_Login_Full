@@ -1,7 +1,7 @@
 package come2niks;
 
-//Data Encapsulation using Getters and Setters
-public class LoginBean {
+//代表用户的Bean对象
+public class UserBean {
 	private String username;
 	private String password;
 	private String firstName;

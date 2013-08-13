@@ -8,7 +8,7 @@ public class LoginDAO {
 	static Connection currentCon = null;
 	static ResultSet rs = null;
 
-	public static LoginBean login(LoginBean bean) {
+	public static UserBean login(UserBean bean) {
 		Statement stmt = null;
 		String username = bean.getUsername();
 		String password = bean.getPassword();
