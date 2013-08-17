@@ -44,7 +44,4 @@ public class UserBean {
 		return valid;
 	}
 
-	public void setValid(boolean newValid) {
-		valid = newValid;
-	}
 }
