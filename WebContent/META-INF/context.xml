@@ -3,11 +3,15 @@
 
 <Context>
 	<!-- Specify a JDBC data source -->
+	<!-- url="jdbc:hsqldb:file:${catalina.base}/wtpwebapps/LoginExample/db/testdb" -->
+	<!-- 以上也可以作为下面的URL, wtp.deploy= catalina.base+wtpwebapps -->
 	<Resource name="jdbc/testdb"
 		auth="Container" type="javax.sql.DataSource"
 		username="sa" password=""
 		driverClassName="org.hsqldb.jdbcDriver"
-		url="jdbc:hsqldb:file:/Users/wangguozheng/git/_demo_JavaEE_Login_Full/db/testdb"
+		
+		url="jdbc:hsqldb:file:${wtp.deploy}/LoginExample/db/testdb"
+		
 		maxActive="10" maxIdle="4" />
 
 </Context>

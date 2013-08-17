@@ -1,6 +1,7 @@
 package wgz.controller;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,13 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.debug("SERVICE 方法启动");
-		
+		try {
+			logger.debug(LoginServlet.class.getResource("/").toURI().getPath());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		//System.exit(0);
+
 		UserBean user = new UserBean();
 		user.setUserName(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
@@ -38,8 +45,8 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("LoginSuccess.jsp");
 		} else
 			response.sendRedirect("LoginFailed.jsp");
-		
-		super.service(request, response);//follow through
+
+		super.service(request, response);// follow through
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
