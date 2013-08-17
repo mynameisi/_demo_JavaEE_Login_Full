@@ -1,30 +1,31 @@
-package come2niks;
+package wgz.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import wgz.helper.db.NativePool;
+
 public class LoginDAO {
-	static Connection currentCon = null;
+	static Connection connection = null;
 	static ResultSet rs = null;
 
 	public static UserBean login(UserBean bean) {
 		Statement stmt = null;
 		String username = bean.getUsername();
 		String password = bean.getPassword();
-		String searchQuery = "select * from users where uname='" + username
-				+ "' AND password='" + password + "'";
+		String searchQuery = "select * from user where username='" + username + "' AND password='" + password + "'";
 
 		try {
+			NativePool db = new NativePool("");
 			// connecting to the DB
-			currentCon = ConnectionManager.getConnection();
-			stmt = currentCon.createStatement();
+			connection = db.getConnection();
+			stmt = connection.createStatement();
 			rs = stmt.executeQuery(searchQuery);
 			boolean userExists = rs.next();
 
 			if (!userExists) {
-				System.out
-						.println("Username/Password entered is Incorrect or User doesnot Exists.");
+				System.out.println("Username/Password entered is Incorrect or User doesnot Exists.");
 				bean.setValid(false);
 			} else if (userExists) {
 				String firstName = rs.getString("FirstName");
@@ -34,10 +35,10 @@ public class LoginDAO {
 				bean.setLastName(lastName);
 				bean.setValid(true);
 			}
+			connection.close();
 
 		} catch (Exception ex) {
-			System.out.println("Log In failed: An Exception has occurred! "
-					+ ex);
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
 		}
 		return bean;
 	}

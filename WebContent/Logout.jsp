@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
 <html>
 <head>
-
-<meta http-equiv="Content-Type"
-	content="text/html; charset=windows-1256">
-<title>Logged Out</title>
+<title>登出</title>
 </head>
 <body>
 
 	<br />
-	<% session.invalidate();%>
-	You are now logged out..
+	<%
+		session.invalidate();
+	%>
+	你现在已经登出，
+	<a href="LoginPage.jsp">返回登陆页面</a>
 	<br />
 
 

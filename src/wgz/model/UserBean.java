@@ -1,4 +1,4 @@
-package come2niks;
+package wgz.model;
 
 //代表用户的Bean对象
 public class UserBean {

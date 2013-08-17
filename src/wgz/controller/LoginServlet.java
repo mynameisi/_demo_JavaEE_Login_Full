@@ -1,4 +1,4 @@
-package come2niks;
+package wgz.controller;
 
 import java.io.IOException;
 
@@ -12,41 +12,44 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(urlPatterns="/LoginServlet")
+import wgz.model.LoginDAO;
+import wgz.model.UserBean;
+
+@WebServlet(urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	private final static Logger looger=LoggerFactory.getLogger(LoginServlet.class);
+	private final static Logger looger = LoggerFactory.getLogger(LoginServlet.class);
 	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
-        super();
-    }
-
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
-		{
-			looger.debug("start doGet method");
-			UserBean user = new UserBean();
-			user.setUserName(request.getParameter("uname"));
-			user.setPassword(request.getParameter("password"));
-			user = LoginDAO.login(user);
-			if(user.isValid())
-			{
-				HttpSession session = request.getSession(true);
-				session.setAttribute("currentSessionUser",user);
-				response.sendRedirect("LoginSuccess.jsp");
-			}else
-				response.sendRedirect("LoginFailed.jsp");
-		} catch (Throwable exc)
-		{
-			System.out.println(exc);
-		}
+	public LoginServlet() {
+		super();
 	}
 
-	
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			looger.debug("开始 doGet 方法");
+			UserBean user = new UserBean();
+			user.setUserName(request.getParameter("username"));
+			user.setPassword(request.getParameter("password"));
+			user = LoginDAO.login(user);
+			if (user.isValid()) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("user", user.getFirstName());
+				response.sendRedirect("LoginSuccess.jsp");
+			} else
+				response.sendRedirect("LoginFailed.jsp");
+		} catch (Throwable exc) {
+			System.out.println(exc);
+		}
+		super.service(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 	}
 
 }
