@@ -1,13 +1,6 @@
-_demo_JavaEE_Login
-==================
+基于一个Login实例的以下概念的学习:
 
-JSP, Servlet, MVC Login
-
-a login example form http://come2niks.com/?p=1451 that provides a good start of:
-
-    ·JSP
-    ·Servlet
-    ·MVC
-    ·Bean
-    ·DAO
-    ·JDBC
+    1. DAO
+    2. BEAN
+    3. DataSource
+    4. JNDI
