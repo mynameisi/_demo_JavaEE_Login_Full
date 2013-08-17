@@ -4,10 +4,12 @@ CREATE TABLE user (
     username        VARCHAR(255),
     password        VARCHAR(255),
     firstName       VARCHAR(255),
-    lastName        VARCHAR(255),
-    valid           BOOLEAN
+    lastName        VARCHAR(255)
 );
 
 
-INSERT INTO user ( username,password,firstName,lastName,valid ) 
-VALUES ( 'admin', 'admin','William','Wang','true');
+INSERT INTO user ( username,password,firstName,lastName ) 
+VALUES ( 'admin', 'admin','William','Wang');
+
+INSERT INTO user ( username,password,firstName,lastName ) 
+VALUES ( '123', '123','John','Carter');
