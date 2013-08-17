@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project><!-- get rid of Eclipse warning message -->
 
 <Context>
 	<!-- Specify a JDBC data source -->
 	<Resource name="jdbc/testdb"
 		auth="Container" type="javax.sql.DataSource"
-		username="sa"
-		password=""
+		username="sa" password=""
 		driverClassName="org.hsqldb.jdbcDriver"
 		url="jdbc:hsqldb:file:/Users/wangguozheng/git/_demo_JavaEE_Login_Full/db/testdb"
 		maxActive="10" maxIdle="4" />
