@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 		user.setUserName(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		user = LoginDAO.login(user);
+		
 		if (user.isValid()) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", user.getFirstName());

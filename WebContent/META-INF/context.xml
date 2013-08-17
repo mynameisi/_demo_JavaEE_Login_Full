@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
 <Context>
-	<Resource name="jdbc/testdb"
-		auth="Container" type="javax.sql.DataSource"
-		username="sa" password=""
+	<Resource 
+		name="jdbc/testdb"
+		auth="Container" 
+		type="javax.sql.DataSource"
+		username="sa" 
+		password=""
 		driverClassName="org.hsqldb.jdbcDriver"
 		url="jdbc:hsqldb:file:${catalina.base}/wtpwebapps/LoginExample/db/testdb"
 		maxActive="10" maxIdle="4" />
