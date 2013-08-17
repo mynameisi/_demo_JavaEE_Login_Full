@@ -1,6 +1,8 @@
 package wgz.controller;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,7 @@ import wgz.model.UserBean;
 
 @WebServlet(urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	private final static Logger looger = LoggerFactory.getLogger(LoginServlet.class);
+	private final static Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public LoginServlet() {
@@ -26,8 +28,13 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.debug("SERVICE 方法启动");
+		Enumeration<String> em=this.getServletContext().getAttributeNames();
+		for(String s:Collections.list(em)){
+			logger.debug(s);
+			logger.debug(this.getServletContext().getAttribute("org.apache.catalina.resources").toString());
+		}
 		try {
-			looger.debug("开始 doGet 方法");
 			UserBean user = new UserBean();
 			user.setUserName(request.getParameter("username"));
 			user.setPassword(request.getParameter("password"));

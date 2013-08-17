@@ -8,7 +8,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LoginDAO {
+	private static final Logger logger = LoggerFactory.getLogger(LoginDAO.class);
 	static Connection connection = null;
 	static ResultSet rs = null;
 	private static DataSource dataSource;
@@ -38,18 +42,20 @@ public class LoginDAO {
 			boolean userExists = rs.next();
 
 			if (!userExists) {
-				System.out.println("Username/Password entered is Incorrect or User doesnot Exists.");
+				bean.valid = false;
+				logger.debug("用户名/密码不正确，或者用户名不存在");
 			} else if (userExists) {
 				String firstName = rs.getString("FirstName");
 				String lastName = rs.getString("LastName");
-				System.out.println("Welcome " + firstName);
+				logger.debug("Welcome " + firstName);
 				bean.setFirstName(firstName);
 				bean.setLastName(lastName);
+				bean.valid = true;
 			}
 			connection.close();
 
 		} catch (Exception ex) {
-			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			ex.printStackTrace();
 		}
 		return bean;
 	}
