@@ -4,11 +4,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import wgz.helper.db.NativePool;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class LoginDAO {
 	static Connection connection = null;
 	static ResultSet rs = null;
+	private static DataSource dataSource;
+	static {
+		try {
+			Context initContext = new InitialContext();
+			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			dataSource = (DataSource) envContext.lookup("jdbc/testdb");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static UserBean login(UserBean bean) {
 		Statement stmt = null;
@@ -17,9 +29,7 @@ public class LoginDAO {
 		String searchQuery = "select * from user where username='" + username + "' AND password='" + password + "'";
 
 		try {
-			NativePool db = new NativePool("");
-			// connecting to the DB
-			connection = db.getConnection();
+			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(searchQuery);
 			boolean userExists = rs.next();
